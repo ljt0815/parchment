@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Test</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style type="text/css">
         @import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap');
@@ -17,16 +19,19 @@
             display: none;
         }
         .txt {
-            font-family: 'Bagel Fat One', cursive;
-            background-color: transparent;
-            opacity: 0.9;
+            /* font-family: 'Bagel Fat One', cursive; */
+            /* background-color: transparent; */
+            border-radius: 5px;
+            padding-left: 10px;
+            /* opacity: 0.5; */
             border: 0;
+            font-weight: 800;
         }
         .txt::placeholder {
-            font-family: 'Bagel Fat One', cursive;
+            /* font-family: 'Bagel Fat One', cursive; */
             color: black;
         }
-        #btn {
+        #asdf {
             position: absolute;
             cursor: pointer;
             color : #24180E;
@@ -35,6 +40,28 @@
             border: 0;
             right: -100px;
             top: 0px;
+        }
+        #login {
+            padding: 0 0.75rem;
+        }
+        .navbar {
+            z-index: 1;
+            opacity: 0.7;
+        }
+        .myLabel {
+            font-family: 'Bagel Fat One', cursive;
+            color: black;
+        }
+        .myLabel:hover {
+            color: white;
+        }
+        .joinLabel {
+            float: right;
+            cursor: pointer;
+        }
+        .findIdLabel {
+            float: left;
+            cursor: pointer;
         }
     </style>
     <script>
@@ -52,35 +79,31 @@
             if (mode == 0) {
                 // 텍스트 박스 위치 조정
                 $(".txtBox").css("left", (v.width * 0.405) + "px");
-                $(".txtBox").css("top", (v.height * 0.32) + "px");
+                $(".txtBox").css("top", (v.height * 0.295) + "px");
                 // 텍스트 박스 크기 조정
                 $(".txtBox").css("width", (v.width * 0.15) + "px");
                 // 인풋텍스트 위치, 크기 조정
                 $(".txt").css("width", (v.width * 0.15) + "px");
                 $(".txt").css("height", (v.height * 0.05) + "px");
                 $(".txt").css("margin-bottom", (v.height * 0.01) + "px");
-                $(".txt").css("font-size", (v.height * 0.03) + "px");
-                //            width: 80px;           height: 120px;
-                $("#btn").css("width", (v.width * 0.05) + "px");
-                $("#btn").css("height", (v.height * 0.15) + "px");
-                $("#btn").css("top", (v.height * -0.05) + "px");
-                $("#btn").css("right", (v.width * -0.05) + "px");
+                $(".txt").css("font-size", (v.height * 0.017) + "px");
+                // label
+                $(".myLabel").css("font-size", (v.height * 0.015) + "px");
             } else {
                 // 텍스트 박스 위치 조정
                 $(".txtBox").css("left", (v.width * 0.31) + "px");
-                $(".txtBox").css("top", (v.height * 0.20) + "px");
+                $(".txtBox").css("top", (v.height * 0.282) + "px");
                 // 텍스트 박스 크기 조정
-                $(".txtBox").css("width", (v.width * 0.2) + "px");
+                $(".txtBox").css("width", (v.width * 0.35) + "px");
                 // 인풋텍스트 위치, 크기 조정
-                $(".txt").css("width", (v.width * 0.2) + "px");
+                $(".txt").css("width", (v.width * 0.35) + "px");
                 $(".txt").css("height", (v.height * 0.03) + "px");
                 $(".txt").css("margin-bottom", (v.height * 0.01) + "px");
                 $(".txt").css("font-size", (v.height * 0.02) + "px");
-                $(".vid").css("top", (v.width * -0.5) + "px");
-                //            width: 80px;           height: 120px;
-                $("#btn").css("width", (v.width * 0.13) + "px");
-                $("#btn").css("height", (v.height * 0.08) + "px");
-                $("#btn").css("right", (v.width * -0.18) + "px");
+                // 비디오 살짝 올리기
+                $(".vid").css("top", (v.width * -0.3) + "px");
+                // label
+                $(".myLabel").css("font-size", (v.height * 0.01) + "px");
             }
         }
         function videoInit() {
@@ -115,15 +138,25 @@
     </script>
 </head>
 <body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">Parchment</a>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)"><i class="fa fa-user-o" aria-hidden="true"></i></a>
+        </li>
+    </ul>
+</nav>
 <figure class="vid">
     <video id="myVideo" onloadeddata="txtBoxResize()" autoplay muted>
         <source id="videoSrc" type="video/mp4" />
     </video>
 </figure>
-<div class="txtBox animate__animated animate__fadeInBottomRight animate__faster">
+<div class="txtBox animate__animated animate__fadeIn">
     <input class="txt" type="text" placeholder="아이디">
     <input class="txt" type="password" placeholder="비밀번호">
-    <div id="btn" onclick="alert('로그인')"></div>
+    <button id="login" type="button" class="btn btn-dark txt">로그인</button>
+    <span class="findIdLabel myLabel">아이디찾기</span>
+    <span class="joinLabel myLabel">회원가입</span>
 </div>
 </body>
 </html>
