@@ -23,6 +23,9 @@ public class Book {
     @JoinColumn(name = "MEMBER_ID", nullable = false)
     private Member member;
 
+    @Column(nullable = false, unique = true)
+    private String uuid;
+
     @Column(nullable = false, length = 50)
     private String title;
 
