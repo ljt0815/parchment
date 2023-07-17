@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/default_layout}"
+      layout:fragment="Content">
+<head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
+    html, body{
+      height: 100%;
+    }
+    .my-height {
+      height: calc(100% - 40px);
+    }
+  </style>
+  <title>parchment</title>
+</head>
+<body>
+  <div class="d-flex my-height">
+    <div class="container align-self-center">
+      <div class="d-flex justify-content-center" style="font-family: 'Noto Sans KR', sans-serif;">
+        책이 한 권도 없어요...ㅜㅜ
+      </div>
+      <div id="uploadLink" class="d-flex justify-content-center mt-3" style="font-family: 'Noto Sans KR', sans-serif;text-decoration: underline #007bff;">
+        <a href="uploadForm.html">책 업로드 하러 가기</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

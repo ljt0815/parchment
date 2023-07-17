@@ -11,4 +11,9 @@ public class HomeController {
         System.out.println("hello");
         return "index";
     }
+
+    @GetMapping("/main")
+    public String main() {
+        return "main";
+    }
 }
