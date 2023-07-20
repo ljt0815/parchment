@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
+h1 {font-family: 'Noto Sans KR', sans-serif;}
+#btn_join {
+    font-family: 'Noto Sans KR', sans-serif;
+    display: block;
+    width: 100%;
+}
+#btn_dupChk {position: absolute;right: 15px;}
+#id {display: inline-block;}
+.lbl {font-size: 0.8rem; margin-bottom: 0; margin-left: 1rem;}
+#lblNum {margin-top: 1rem;}
+#pwdLabelBox {display: none;}
+#lblrepwd {display: none; color: red;}
+#lblId{display:none; color: red;}
+#lblSpecial{font-size: 0.7rem;}
