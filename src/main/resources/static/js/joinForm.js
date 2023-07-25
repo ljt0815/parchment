@@ -1,26 +1,21 @@
 function pwdCheckLabel(input) {
-    let lowercaseRegex = /[a-z]/;
-    let uppercaseRegex = /[A-Z]/;
+    let alphaRegex = /[a-zA-Z]/;
     let numberRegex = /[0-9]/;
     let specialRegex = /[^0-9a-zA-Z\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\<\.\>\/\?]+/;
     let lenMinRegex = /.{10,}/;
-    if (input.match(lowercaseRegex))
-        $("#lblLower").css("color", "green");
+    if (input.match(alphaRegex))
+        $("#lblAlpha").css("color", "green");
     else
-        $("#lblLower").css("color", "red");
-    if (input.match(uppercaseRegex))
-        $("#lblUpper").css("color", "green");
-    else
-        $("#lblUpper").css("color", "red");
-    // 특수문자는 허용값 이외의 값이 들어오면 정규표현식이 잡아줌
-    if (input.match(specialRegex))
-        $("#lblSpecial").css("color", "red");
-    else
-        $("#lblSpecial").css("color", "green");
+        $("#lblAlpha").css("color", "red");
     if (input.match(numberRegex))
         $("#lblNum").css("color", "green");
     else
         $("#lblNum").css("color", "red");
+    // 특수문자는 참일경우 빨간색으로 변경
+    if (input.match(specialRegex))
+        $("#lblSpecial").css("color", "red");
+    else
+        $("#lblSpecial").css("color", "green");
     if (input.match(lenMinRegex))
         $("#lblLength").css("color", "green");
     else
@@ -31,9 +26,24 @@ $(function(){
     $("#btn_join").click(function(){
         let data = {
             username: $("#id").val(),
-            email: $("#email").val(),
             password: $("#pwd").val()
         };
+        // location.href="first_main.html";
+        if ($("#repwd")[0].value !== $("#pwd").val()) {
+            alert("비밀번호와 비밀번호 확인이 서로 다릅니다.");
+            return;
+        }
+        //최종 정규식
+        let idRegex = /^[a-z0-9]{5,20}$/;
+        let pwdRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\<\.\>\/\?]{10,}$/;
+        if (!$("#id").val().match(idRegex) || !idDupChk){
+            alert("아이디 중복확인이 되지 않았습니다.");
+            return ;
+        }
+        if (!$("#pwd").val().match(pwdRegex)){
+            alert("비밀번호가 규칙에 맞지 않습니다.");
+            return ;
+        }
         $.ajax({
             url: "/user/join",
             data: JSON.stringify(data),
@@ -41,26 +51,11 @@ $(function(){
             method: "POST",
             dataType: "json"
         }).done(function(resp){
-            console.log(resp);
+            alert('회원가입이 완료되었습니다.');
+            location.href = "/";
         }).fail(function(xhr, status, errorThrown){
             console.log(errorThrown + status);
         });
-        // // location.href="first_main.html";
-        // if ($("#repwd")[0].value !== $("#pwd").val()) {
-        //     alert("비밀번호와 비밀번호 확인이 서로 다릅니다.");
-        //     return ;
-        // }
-        // //최종 정규식
-        // let idRegex = /^[a-z0-9]{5,20}$/;
-        // let pwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\<\.\>\/\?]{10,}$/;
-        // if (!$("#id").val().match(idRegex) || !idDupChk){
-        //     alert("아이디 중복확인이 되지 않았습니다.");
-        //     return ;
-        // }
-        // if (!$("#pwd").val().match(pwdRegex)){
-        //     alert("비밀번호가 규칙에 맞지 않습니다.");
-        //     return ;
-        // }
 
     });
     $("#btn_dupChk").click(function(){

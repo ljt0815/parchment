@@ -23,7 +23,7 @@ public class Member {
     @Column(nullable = false, length = 100)
     private String password;
 
-    @Column(nullable = false, length = 30, unique = true)
+    @Column(length = 30, unique = true)
     private String email;
 
     @Enumerated(EnumType.STRING)

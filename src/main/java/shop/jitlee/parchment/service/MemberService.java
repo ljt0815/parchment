@@ -24,10 +24,11 @@ public class MemberService {
     @Transactional
     public void join(Member member) {
         member.setRole(RoleType.USER);
+        memberRepository.save(member);
         try {
             memberRepository.save(member);
         } catch (DataIntegrityViolationException e) {
-            System.out.println("이메일 중복에러");
+            System.out.println("중복에러");
         }
     }
 }
