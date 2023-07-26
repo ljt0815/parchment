@@ -45,7 +45,7 @@ $(function(){
             return ;
         }
         $.ajax({
-            url: "/user/join",
+            url: "/join",
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             method: "POST",
@@ -66,7 +66,7 @@ $(function(){
         if ($("#id").val().match(regex)) {
             idDupChk = true;
             $.ajax({
-                url: "/user/idDupChk",
+                url: "/idDupChk",
                 data: JSON.stringify(data),
                 contentType: "application/json; charset=utf-8",
                 method: "POST",

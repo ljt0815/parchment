@@ -5,21 +5,27 @@
       layout:decorate="~{/layout/default_layout}"
       layout:fragment="Content">
 <head>
-    <script src="/js/index.js"></script>
-    <link rel="stylesheet" href="/css/index.css"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
+    html, body{
+      height: 100%;
+    }
+    .my-height {
+      height: calc(100% - 40px);
+    }
+  </style>
+  <title>parchment</title>
 </head>
 <body>
-<figure class="vid">
-    <video id="myVideo" onloadeddata="txtBoxResize()" autoplay muted>
-        <source id="videoSrc" type="video/mp4" />
-    </video>
-</figure>
-<div class="txtBox animate__animated animate__fadeIn">
-    <input class="txt" type="text" placeholder="아이디">
-    <input class="txt" type="password" placeholder="비밀번호">
-    <button id="login" type="button" class="btn btn-dark txt">로그인</button>
-    <a href="/user/help" class="findIdLabel myLabel">아이디찾기</a>
-    <a href="/joinForm" class="joinLabel myLabel">회원가입</a>
-</div>
+  <div class="d-flex my-height">
+    <div class="container align-self-center">
+      <div class="d-flex justify-content-center" style="font-family: 'Noto Sans KR', sans-serif;">
+        책이 한 권도 없어요...ㅜㅜ
+      </div>
+      <div id="uploadLink" class="d-flex justify-content-center mt-3" style="font-family: 'Noto Sans KR', sans-serif;text-decoration: underline #007bff;">
+        <a href="uploadForm.html">책 업로드 하러 가기</a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/default_layout}"
+      layout:fragment="Content">
+<head>
+    <script src="/js/loginForm.js"></script>
+    <link rel="stylesheet" href="/css/loginForm.css"/>
+</head>
+<body>
+<figure class="vid">
+    <video id="myVideo" onloadeddata="txtBoxResize()" autoplay muted>
+        <source id="videoSrc" type="video/mp4" />
+    </video>
+</figure>
+<form action="/login" method="post">
+    <div class="txtBox animate__animated animate__fadeIn">
+        <input class="txt" type="text" id="username" name="username" placeholder="아이디">
+        <input class="txt" type="password" id="password" name="password" placeholder="비밀번호">
+        <button id="login" type="submit" class="btn btn-dark txt">로그인</button>
+        <a href="/user/help" class="findIdLabel myLabel">아이디찾기</a>
+        <a href="/joinForm" class="joinLabel myLabel">회원가입</a>
+    </div>
+</form>
+<script th:if="${error}" th:inline="javascript">
+    /*<![CDATA[*/
+    alert(/*[[${exception}]]*/);
+    /*]]>*/
+</script>
+</body>
+</html>

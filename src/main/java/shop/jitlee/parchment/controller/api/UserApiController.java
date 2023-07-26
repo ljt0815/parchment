@@ -20,7 +20,7 @@ public class UserApiController {
 
     private final MemberService memberService;
 
-    @PostMapping("/user/idDupChk")
+    @PostMapping("/idDupChk")
     public ResponseDto<Integer> idDupChk(@RequestBody Map<String,String> id) {
 
         String username = id.get("id");
@@ -30,7 +30,7 @@ public class UserApiController {
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 
-    @PostMapping("/user/join")
+    @PostMapping("/join")
     public ResponseDto<Integer> join(@Valid @RequestBody UserJoinDto userJoinDto) {
         Member member = userJoinDto.toEntity();
         member.setRole(RoleType.USER);

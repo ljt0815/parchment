@@ -2,6 +2,7 @@ package shop.jitlee.parchment.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.jitlee.parchment.entity.Member;
@@ -13,6 +14,7 @@ import shop.jitlee.parchment.repository.MemberRepository;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
     public Member find(String username) {
@@ -24,6 +26,8 @@ public class MemberService {
     @Transactional
     public void join(Member member) {
         member.setRole(RoleType.USER);
+        String rawPassword = member.getPassword();
+        member.setPassword(bCryptPasswordEncoder.encode(rawPassword));
         memberRepository.save(member);
         try {
             memberRepository.save(member);
