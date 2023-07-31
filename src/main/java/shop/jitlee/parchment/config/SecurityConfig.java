@@ -29,8 +29,8 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests(authorize -> authorize.antMatchers("/")
                         .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
-                        .antMatchers("/admin/**")
-                        .access("hasRole('ROLE_ADMIN')")
+                        .antMatchers("/book/**")
+                        .access("hasRole('ROLE_USER')")
                         .anyRequest().permitAll());
         return http.build();
     }

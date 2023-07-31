@@ -1,0 +1,24 @@
+#file-drop-box {
+    height: 280px; background-color: #91C8E4; border-radius: 20px; cursor: pointer;
+    border: double #749BC2 10px;
+}
+#file-ico, #error-ico, #success-ico {
+    font-size : 50px;
+    color: #F6F4EB;
+}
+#file-lbl {
+    font-size : 40px;
+    color: #F6F4EB;
+    font-weight: bold;
+    text-align: center;
+}
+#error-ico, #success-ico {
+    display: none;
+}
+.upload-ico {
+    font-size : 20px;
+    position: absolute;
+    color: #F6F4EB;
+    right: 10px;
+    bottom: 10px;
+}
