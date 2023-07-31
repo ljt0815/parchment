@@ -34,6 +34,8 @@ function fileSelect(files) {
 }
 
 $(function() {
+    if (window.innerWidth < 768)
+        $("#file-lbl").text("여기를 눌러 파일을 업로드하세요.");
     $("#file").on("change", function(e){
         if (!fileSelect($(this)[0].files)) { // 파일이 유효하지 않을 때
             $("#file-drop-box").addClass("animate__animated animate__bounce animate__shakeX");
