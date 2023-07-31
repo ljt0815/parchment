@@ -125,5 +125,44 @@ $(function() {
                 $("#file-drop-box").removeClass("animate__animated animate__bounce animate__shakeY");
         }
     });
-
+    $("#btn_upload").click(function(){
+        let data = new FormData();
+        data.append("file", uploadFile);
+        $(".progress").css("display", "flex");
+        $.ajax({
+            data: data,
+            type: "POST",
+            url: "/book/upload",
+            contentType: false,
+            processData: false,
+            xhr: function() {
+                let xhr = $.ajaxSettings.xhr();
+                xhr.upload.onprogress = function (e) {
+                    let percent = Math.ceil(e.loaded * 100 / e.total);
+                    $(".progress-bar").css("width", percent + "%");
+                    $(".progress-bar").text(percent + "%");
+                };
+                return xhr;
+            },
+            success : function(resp) {
+                let data2 = {
+                    title: $("#title").val(),
+                    uuid: resp.data.uuid,
+                    id: resp.data.id
+                }
+                $.ajax({
+                    url: "/book/add",
+                    data: JSON.stringify(data2),
+                    contentType: "application/json; charset=utf-8",
+                    method: "POST",
+                    dataType: "json"
+                }).done(function(resp){
+                    alert('책 업로드가 왼료 되었습니다.');
+                    location.href = "/";
+                }).fail(function(xhr, status, errorThrown){
+                    console.log(errorThrown + status);
+                });
+            }
+        });
+    });
 });

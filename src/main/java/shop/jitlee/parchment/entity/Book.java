@@ -1,9 +1,6 @@
 package shop.jitlee.parchment.entity;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -12,6 +9,8 @@ import java.sql.Timestamp;
 @Entity
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
 public class Book {
 
     @Id
@@ -23,7 +22,11 @@ public class Book {
     @JoinColumn(name = "MEMBER_ID", nullable = false)
     private Member member;
 
-    @Column(nullable = false, unique = true)
+    @OneToOne
+    @JoinColumn(name = "PDF_ID")
+    private Pdf pdf;
+
+    @Column(nullable = false, unique = true, length = 36)
     private String uuid;
 
     @Column(nullable = false, length = 50)
