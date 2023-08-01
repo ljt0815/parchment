@@ -12,6 +12,7 @@ import shop.jitlee.parchment.config.auth.PrincipalDetails;
 import shop.jitlee.parchment.dto.AddBookDto;
 import shop.jitlee.parchment.dto.ResponseDto;
 import shop.jitlee.parchment.entity.Book;
+import shop.jitlee.parchment.entity.Pdf;
 import shop.jitlee.parchment.service.BookService;
 import shop.jitlee.parchment.service.PdfService;
 
@@ -37,8 +38,9 @@ public class BookApiController {
     public ResponseDto<Integer> bookAdd(@AuthenticationPrincipal PrincipalDetails principalDetails,
                                         @RequestBody AddBookDto addBookDto) {
         Book book = addBookDto.toEntity();
-        bookService.addBook(book, principalDetails.getUsername(), addBookDto.getId());
-
+        Pdf pdf = pdfService.find(addBookDto.getId());
+        bookService.addBook(book, principalDetails.getUsername(), pdf);
+        pdfService.convertPdf(pdf);
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 }

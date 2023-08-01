@@ -157,7 +157,7 @@ $(function() {
                     method: "POST",
                     dataType: "json"
                 }).done(function(resp){
-                    alert('책 업로드가 왼료 되었습니다.');
+                    alert('책 업로드가 완료 되었습니다.');
                     location.href = "/";
                 }).fail(function(xhr, status, errorThrown){
                     console.log(errorThrown + status);

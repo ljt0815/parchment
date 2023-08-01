@@ -4,7 +4,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       use-new-id-generator-mappings: false
@@ -22,3 +22,8 @@ spring:
   mvc:
     view:
       suffix: .html
+
+myPath:
+  externalImgStorage: D:\uploads\img\
+  imgConnectPath: /images/
+  externalPdfStorage: D:\uploads\pdf\

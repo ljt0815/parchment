@@ -20,4 +20,6 @@ public class Pdf {
 
     @Column(nullable = false)
     private String path;
+
+    private int pageTotal;
 }

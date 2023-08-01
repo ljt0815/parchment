@@ -1,9 +1,6 @@
 package shop.jitlee.parchment.entity;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Column;
@@ -15,6 +12,7 @@ import java.sql.Timestamp;
 @Entity
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Image {
 
     @Id @GeneratedValue

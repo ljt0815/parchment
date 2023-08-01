@@ -14,7 +14,6 @@ public class BookService {
 
     private final BookRepository bookRepository;
     private final MemberService memberService;
-    private final PdfService pdfService;
 
     @Transactional
     public Book find(Long id) {
@@ -25,11 +24,12 @@ public class BookService {
     }
 
     @Transactional
-    public void addBook(Book book, String username, Long pdfId) {
+    public void addBook(Book book, String username, Pdf pdf) {
         Member member = memberService.find(username);
         book.setMember(member);
-        Pdf pdf = pdfService.find(pdfId);
         book.setPdf(pdf);
         bookRepository.save(book);
     }
+
+
 }
