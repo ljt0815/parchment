@@ -32,6 +32,10 @@ public class Book {
     @Column(nullable = false, length = 50)
     private String title;
 
+    @OneToOne
+    @JoinColumn(name = "thumbnail_image_id")
+    private Image thumbnail;
+
     @CreationTimestamp
     private Timestamp postDate;
 }

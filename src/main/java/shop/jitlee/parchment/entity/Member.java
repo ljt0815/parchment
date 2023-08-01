@@ -5,6 +5,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -25,6 +27,9 @@ public class Member {
 
     @Column(length = 30, unique = true)
     private String email;
+
+    @OneToMany(mappedBy = "member")
+    private List<Book> books = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private RoleType role;

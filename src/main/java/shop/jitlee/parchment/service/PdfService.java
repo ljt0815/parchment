@@ -60,7 +60,6 @@ public class PdfService {
     }
 
     @Async("pdfConvertExecutor")
-    @Transactional
     public void convertPdf(Pdf pdf) {
         String uuid = bookRepository.getBookUuid(pdf.getId());
         Long bookId = bookRepository.getBookId(pdf.getId());
@@ -85,6 +84,11 @@ public class PdfService {
                 imageService.addImage(image);
                 Page myPage = new Page(null, book, image, null);
                 pageService.addPage(myPage);
+                if (page == 0)
+                    if (book.getThumbnail() == null) {
+                        book.setThumbnail(image);
+                        bookRepository.save(book);
+                    }
             }
         } catch (Exception e) {
             e.printStackTrace();
