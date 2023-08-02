@@ -54,7 +54,7 @@ public class PdfService {
             dest.delete();
             e.printStackTrace();
         }
-        Pdf pdf = new Pdf(null, multipartFile.getOriginalFilename(), pdfPath + map.get("uuid") + ".pdf",0);
+        Pdf pdf = new Pdf(null, multipartFile.getOriginalFilename(), pdfPath + map.get("uuid") + ".pdf", false,0);
         pdfRepository.save(pdf);
         map.put("id", pdf.getId());
     }
@@ -99,5 +99,7 @@ public class PdfService {
                 ee.printStackTrace();
             }
         }
+        pdf.setConverted(true);
+        pdfRepository.save(pdf);
     }
 }

@@ -43,4 +43,16 @@ public class BookApiController {
         pdfService.convertPdf(pdf);
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
+
+    @PostMapping("/book/getConvertProgress")
+    public ResponseDto<Map<String, Object>> getConvertProgress(@RequestBody Map<String, Object> map) {
+        String uuid = (String)map.get("uuid");
+        Integer pageTotal = bookService.getPageTotal(uuid);
+        Integer convertedPage = bookService.getConvertedPage(uuid);
+        Map<String, Object> rtn = new HashMap<>();
+        rtn.put("pageTotal", pageTotal);
+        rtn.put("convertedPage", convertedPage);
+
+        return new ResponseDto<>(HttpStatus.OK.value(), rtn);
+    }
 }

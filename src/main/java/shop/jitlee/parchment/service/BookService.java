@@ -45,6 +45,14 @@ public class BookService {
         return bookRepository.findByUuidGetMemberId(uuid);
     }
 
+    public Integer getPageTotal(String uuid){
+        return bookRepository.getPageTotal(uuid);
+    }
+
+    public Integer getConvertedPage(String uuid) {
+        return bookRepository.getConvertedPage(uuid);
+    }
+
     public void imgFileResponse(String folderName, String username, String fileName, HttpServletResponse res) {
         Long bookMemberId = findByUuidGetMemberId(folderName);
         Long requestMemberId = memberService.findByUsernameGetId(username);

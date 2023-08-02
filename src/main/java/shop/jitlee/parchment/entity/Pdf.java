@@ -1,6 +1,7 @@
 package shop.jitlee.parchment.entity;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -20,6 +21,10 @@ public class Pdf {
 
     @Column(nullable = false)
     private String path;
+
+    @ColumnDefault("false")
+    @Column(columnDefinition = "TINYINT(1)")
+    private boolean isConverted;
 
     private int pageTotal;
 }
