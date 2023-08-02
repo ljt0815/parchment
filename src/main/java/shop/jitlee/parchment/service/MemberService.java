@@ -35,4 +35,8 @@ public class MemberService {
             System.out.println("중복에러");
         }
     }
+
+    public Long findByUsernameGetId(String username) {
+        return memberRepository.findByUsernameGetId(username);
+    }
 }
