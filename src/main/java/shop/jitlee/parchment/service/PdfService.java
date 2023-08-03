@@ -78,7 +78,7 @@ public class PdfService {
             folder.mkdir();
             for (int page = 0; page < pageCount; page++) {
                 BufferedImage bim = renderer.renderImage(page);
-                File imgFile = new File(folder.getPath() + "\\" + page + ".png");
+                File imgFile = new File(folder.getPath() + "/" + page + ".png");
                 ImageIO.write(bim, "png", imgFile);
                 Image image = new Image(null, imgConnectPath + uuid + "/" + page + ".png", null);
                 imageService.addImage(image);

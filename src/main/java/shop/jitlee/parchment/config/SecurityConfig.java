@@ -1,5 +1,6 @@
 package shop.jitlee.parchment.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,7 +10,10 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final CustomAuthFailureHandler customAuthFailureHandler;
 
     @Bean
     public BCryptPasswordEncoder encodePwd() {
@@ -25,6 +29,7 @@ public class SecurityConfig {
                 .formLogin()
                 .loginPage("/loginForm")
                 .loginProcessingUrl("/login")
+                .failureHandler(customAuthFailureHandler)
                 .defaultSuccessUrl("/")
                 .and()
                 .authorizeRequests(authorize -> authorize.antMatchers("/")
