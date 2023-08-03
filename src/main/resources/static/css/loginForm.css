@@ -33,7 +33,7 @@ body {background-color: black;}
     color: black;
 }
 .myLabel:hover {
-    color: white;
+    color: #f7f7f7;
 }
 .joinLabel {
     float: right;

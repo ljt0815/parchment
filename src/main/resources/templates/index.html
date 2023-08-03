@@ -9,7 +9,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
     html, body{
         height: 100%;
-        background-color: #212529;
+        background-color: #262626;
     }
     .my-height {
       height: calc(100% - 40px);
@@ -17,14 +17,15 @@
     .book-thumbnail {
         width: 100%;
         height: 200px;
-        border-radius: 20%;
+        border-radius: 10%;
+        filter: brightness(80%);
     }
     .book-lbl {
         white-space: nowrap;
         overflow: hidden;
         text-overflow:ellipsis;
         text-align: center;
-        color: white;
+        color: #dedede;
     }
     .book {
         display: inline-block;
@@ -32,7 +33,7 @@
     }
     .loading {
         position: absolute;
-        color: white;
+        color: #dedede;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -46,7 +47,7 @@
     }
     .loading-percent {
         position: absolute;
-        color: white;
+        color: #dedede;
         top: 70%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -65,7 +66,6 @@
             margin: auto;
             width: 80%;
             height: 500px;
-            border-radius: 10%;
         }
         .my-height {
             height: auto;
@@ -133,7 +133,7 @@
 <body>
   <div class="d-flex my-5 my-height">
       <div th:if="${#lists.isEmpty(member.books)}" class="container align-self-center">
-        <div class="d-flex justify-content-center" style="font-family: 'Noto Sans KR', sans-serif; color: white">
+        <div class="d-flex justify-content-center" style="font-family: 'Noto Sans KR', sans-serif; color: #dedede">
           책이 한 권도 없어요...ㅜㅜ
         </div>
         <div id="uploadLink" class="d-flex justify-content-center mt-3" style="font-family: 'Noto Sans KR', sans-serif;text-decoration: underline #007bff;">

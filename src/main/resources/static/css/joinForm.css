@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
 h1 {font-family: 'Noto Sans KR', sans-serif;}
+html, body{
+    height: 100%;
+    background-color: #262626;
+}
 #btn_join {
     font-family: 'Noto Sans KR', sans-serif;
     display: block;
@@ -13,3 +17,4 @@ h1 {font-family: 'Noto Sans KR', sans-serif;}
 #lblId{display:none; color: red; margin-top: 0.7rem;}
 #lblrepwd {display: none; color: red; margin-top: 0.7rem;}
 #lblSpecial{font-size: 0.7rem;}
+.form-control {background-color: #dedede}
