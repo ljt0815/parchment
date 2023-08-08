@@ -82,7 +82,7 @@ public class PdfService {
                 ImageIO.write(bim, "png", imgFile);
                 Image image = new Image(null, imgConnectPath + uuid + "/" + page + ".png", null);
                 imageService.addImage(image);
-                Page myPage = new Page(null, book, image, null);
+                Page myPage = new Page(null, book, image, page);
                 pageService.addPage(myPage);
                 if (page == 0)
                     if (book.getThumbnail() == null) {

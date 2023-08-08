@@ -34,15 +34,25 @@ public class BookService {
     }
 
     @Transactional
+    public void save(Book book) {
+        bookRepository.save(book);
+    }
+
+    @Transactional
     public void addBook(Book book, String username, Pdf pdf) {
         Member member = memberService.find(username);
         book.setMember(member);
         book.setPdf(pdf);
+        book.setCurrentPage(0);
         bookRepository.save(book);
     }
 
     public Long findByUuidGetMemberId(String uuid) {
         return bookRepository.findByUuidGetMemberId(uuid);
+    }
+
+    public Integer findByUuidGetCurrentPage(String uuid) {
+        return bookRepository.findByUuidGetCurrentPage(uuid);
     }
 
     public Integer getPageTotal(String uuid){

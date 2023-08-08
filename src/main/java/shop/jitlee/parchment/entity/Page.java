@@ -22,7 +22,6 @@ public class Page {
     @JoinColumn(name = "IMAGE_ID", nullable = false)
     private Image image;
 
-    @OneToOne
-    @JoinColumn(name = "NOTE_ID")
-    private Note note;
+    @Column(nullable = false)
+    private Integer pageNo;
 }

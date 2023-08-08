@@ -32,6 +32,9 @@ public class Book {
     @Column(nullable = false, length = 50)
     private String title;
 
+    @Column(nullable = false)
+    private Integer currentPage;
+
     @OneToOne
     @JoinColumn(name = "thumbnail_image_id")
     private Image thumbnail;

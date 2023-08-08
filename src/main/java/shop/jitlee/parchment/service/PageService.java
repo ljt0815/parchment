@@ -17,4 +17,7 @@ public class PageService {
         pageRepository.save(page);
     }
 
+    public String findByPageNoUuidGetImgPath(Integer pageNo, String uuid) {
+        return pageRepository.findByPageNoUuidGetImgPath(pageNo, uuid);
+    }
 }
