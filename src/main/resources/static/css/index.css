@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
+html, body{
+    height: 100%;
+    background-color: #262626;
+}
+.my-height {
+    height: calc(100% - 40px);
+}
+.book-thumbnail {
+    width: 100%;
+    height: 200px;
+    border-radius: 10%;
+    filter: brightness(80%);
+}
+.book-lbl {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    text-align: center;
+    color: #dedede;
+}
+.book {
+    display: inline-block;
+    cursor: pointer;
+}
+.loading {
+    position: absolute;
+    color: #dedede;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+.loading-ico {
+    animation: rotate linear 5s infinite;
+}
+.thumbnail-box {
+    position: relative;
+}
+.loading-percent {
+    position: absolute;
+    color: #dedede;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+@media (max-width: 767px) {
+    .book-thumbnail {
+        display: block;
+        margin: auto;
+        width: 80%;
+        height: 500px;
+    }
+    .my-height {
+        height: auto;
+    }
+    #book-list .my-5 {
+        margin-bottom: 10rem!important;
+        margin-top: 10rem!important;
+    }
+    #book-list .my-2 {
+        margin-bottom: 2rem!important;
+        margin-top: 2rem!important;
+    }
+    .loading, .loading-percent {
+        font-size : 45px;
+    }
+}

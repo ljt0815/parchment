@@ -26,7 +26,6 @@ public class BookApiController {
 
     private final PdfService pdfService;
     private final BookService bookService;
-    private final PageService pageService;
 
     @PostMapping("/book/upload")
     public ResponseDto<Map> bookUpload(@RequestParam("file") MultipartFile multipartFile) {
@@ -58,43 +57,10 @@ public class BookApiController {
 
     @PostMapping("/book/getPagePath")
     public ResponseDto<Map<String, Object>> getPagePath(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody Map<String, Object> map) {
-        String requestUsername = principalDetails.getUsername();
         Map<String, Object> rtn = new HashMap<>();
-        String uuid = (String)map.get("uuid");
-        String flag = (String)map.get("flag");
-        String type = (String)map.get("type");
-        Book book = bookService.find(bookService.findByUuidGetBookId(uuid));
-        if (!book.getMember().getUsername().equals(requestUsername)) {
+        bookService.imgFilePathResponse(principalDetails.getUsername(), map, rtn);
+        if (rtn.isEmpty())
             return new ResponseDto<>(HttpStatus.NOT_FOUND.value(), rtn);
-        }
-        Integer currentPage = book.getCurrentPage();
-        Integer totalPage = book.getPdf().getPageTotal();
-
-        if (flag.equals("next")) {
-            if (type.equals("pc"))
-                currentPage += 2;
-            else if (type.equals("mobile"))
-                currentPage += 1;
-            if (currentPage >= totalPage)
-                currentPage = totalPage - 1;
-            book.setCurrentPage(currentPage);
-            bookService.save(book);
-        } else if (flag.equals("previous")) {
-            if (type.equals("pc"))
-                currentPage -= 2;
-            else if (type.equals("mobile"))
-                currentPage -= 1;
-            if (currentPage < 0)
-                currentPage = 0;
-            book.setCurrentPage(currentPage);
-            bookService.save(book);
-        }
-        //페이지에서 이미지 경로 2개 가져오기
-        String imgPath1 = pageService.findByPageNoUuidGetImgPath(currentPage, uuid);
-        String imgPath2 = pageService.findByPageNoUuidGetImgPath(currentPage + 1, uuid);
-
-        rtn.put("page1Path", imgPath1);
-        rtn.put("page2Path", imgPath2);
         return new ResponseDto<>(HttpStatus.OK.value(), rtn);
     }
 }

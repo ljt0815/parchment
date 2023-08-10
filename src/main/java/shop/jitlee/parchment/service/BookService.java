@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.jitlee.parchment.dto.ResponseDto;
 import shop.jitlee.parchment.entity.Book;
 import shop.jitlee.parchment.entity.Member;
 import shop.jitlee.parchment.entity.Pdf;
@@ -14,6 +15,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +23,7 @@ public class BookService {
 
     private final BookRepository bookRepository;
     private final MemberService memberService;
+    private final PageService pageService;
 
     @Value("${myPath.externalImgStorage}")
     private String imgPath;
@@ -61,6 +64,43 @@ public class BookService {
 
     public Integer getConvertedPage(String uuid) {
         return bookRepository.getConvertedPage(uuid);
+    }
+
+    public void imgFilePathResponse(String username, Map<String, Object> map, Map<String, Object> rtn) {
+        String uuid = (String)map.get("uuid");
+        String flag = (String)map.get("flag");
+        String type = (String)map.get("type");
+        Book book = find(findByUuidGetBookId(uuid));
+        if (!book.getMember().getUsername().equals(username))
+            return ;
+        Integer currentPage = book.getCurrentPage();
+        Integer totalPage = book.getPdf().getPageTotal();
+
+        if (flag.equals("next")) {
+            if (type.equals("pc"))
+                currentPage += 2;
+            else if (type.equals("mobile"))
+                currentPage += 1;
+            if (currentPage >= totalPage)
+                currentPage = totalPage - 1;
+            book.setCurrentPage(currentPage);
+            save(book);
+        } else if (flag.equals("previous")) {
+            if (type.equals("pc"))
+                currentPage -= 2;
+            else if (type.equals("mobile"))
+                currentPage -= 1;
+            if (currentPage < 0)
+                currentPage = 0;
+            book.setCurrentPage(currentPage);
+            save(book);
+        }
+        //페이지에서 이미지 경로 2개 가져오기
+        String imgPath1 = pageService.findByPageNoUuidGetImgPath(currentPage, uuid);
+        String imgPath2 = pageService.findByPageNoUuidGetImgPath(currentPage + 1, uuid);
+
+        rtn.put("page1Path", imgPath1);
+        rtn.put("page2Path", imgPath2);
     }
 
     public void imgFileResponse(String folderName, String username, String fileName, HttpServletResponse res) {
@@ -112,4 +152,5 @@ public class BookService {
             //추후 에러페이지 출력
         }
     }
+
 }
