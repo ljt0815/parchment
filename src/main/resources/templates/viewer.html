@@ -84,6 +84,18 @@
                 console.log(errorThrown + status);
             });
         }
+        function getNextPage() {
+            if (window.innerWidth > 1200)
+                getPagePath("next","pc");
+            else
+                getPagePath("next","mobile");
+        }
+        function getPreviousPage() {
+            if (window.innerWidth > 1200)
+                getPagePath("previous","pc")
+            else
+                getPagePath("previous", "mobile");
+        }
         $(function() {
             if (window.innerWidth > 1200)
                 getPagePath("","pc");
@@ -140,17 +152,12 @@
                 }
             });
             $("#btn_next").click(function(){
-                if (window.innerWidth > 1200)
-                    getPagePath("next","pc");
-                else
-                    getPagePath("next","mobile");
+                getNextPage();
             });
             $("#btn_previous").click(function(){
-                if (window.innerWidth > 1200)
-                    getPagePath("previous","pc")
-                else
-                    getPagePath("previous", "mobile");
+                getPreviousPage();
             });
+
             // 모바일 화면조정
             let page1 = $("#page1")[0];
             // 1. ResizeObserver 객체 만들기
@@ -175,6 +182,16 @@
             observer.observe(page1);
             $("#page1").height(window.innerHeight * 0.98);
             $("#page2").height(window.innerHeight * 0.98);
+            // 키보드이벤트
+            $(document).keydown(function(e) {
+                if ( e.keyCode == 39 || e.which == 39 ) {
+                    console.log("asdf");
+                    getNextPage();
+                } else if ( e.keyCode == 37 || e.which == 37 ) {
+                    console.log("qwer");
+                    getPreviousPage();
+                }
+            });
         });
     </script>
 </head>
