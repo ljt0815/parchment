@@ -19,6 +19,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("select count(p.id) from Book b inner join Page p on b.id = p.book.id where b.uuid = :uuid")
     Integer getConvertedPage(String uuid);
 
-    @Query("select b.currentPage from Book b where b.uuid = :uuid")
-    Integer findByUuidGetCurrentPage(String uuid);
+    @Query("select b.id from Book b where b.uuid = :uuid")
+    Long findByUuidGetBookId(String uuid);
 }

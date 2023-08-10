@@ -86,7 +86,6 @@
     <script>
         function calcPercent(loadingBook){
             let imgBox = $(loadingBook.children(".thumbnail-box"));
-            console.log($(loadingBook.children("input")).val())
             let data = {
                 uuid : $(loadingBook.children("input")).val()
             }
@@ -127,6 +126,11 @@
             }
             , 300);
         }
+        $(function() {
+            $(".book").click(function(){
+                location.href="/book/viewer/" + $(this).children("input").val();
+            })
+        })
     </script>
   <title>parchment</title>
 </head>
@@ -151,7 +155,8 @@
                         <p id="percent-lbl"></p>
                         <img src onerror='intervalControl(this)'>
                     </div>
-                    <img th:src="${book.thumbnail.imgPath}" class="book-thumbnail">
+                    <img th:if="${book.thumbnail != null}" th:src="${book.thumbnail.imgPath}" class="book-thumbnail">
+                    <img th:if="${book.thumbnail == null}" src="/img/white.png" class="book-thumbnail">
                 </div>
               <div th:text="${book.title}" class="book-lbl"></div>
               <input type="hidden" th:value="${book.uuid}">

@@ -2,6 +2,7 @@ package shop.jitlee.parchment.service;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
@@ -70,14 +71,13 @@ public class PdfService {
             File file = new File(pdf.getPath());
             document = PDDocument.load(file);
             PDFRenderer renderer = new PDFRenderer(document);
-            List<BufferedImage> bufferedImages = new ArrayList<>();
             int pageCount = document.getNumberOfPages();
             pdf.setPageTotal(pageCount);
             pdfRepository.save(pdf);
             File folder = new File(imgPath + uuid);
             folder.mkdir();
             for (int page = 0; page < pageCount; page++) {
-                BufferedImage bim = renderer.renderImage(page);
+                BufferedImage bim = renderer.renderImageWithDPI(page, 150, ImageType.RGB);
                 File imgFile = new File(folder.getPath() + "/" + page + ".png");
                 ImageIO.write(bim, "png", imgFile);
                 Image image = new Image(null, imgConnectPath + uuid + "/" + page + ".png", null);

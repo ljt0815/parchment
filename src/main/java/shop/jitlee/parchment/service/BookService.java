@@ -51,8 +51,8 @@ public class BookService {
         return bookRepository.findByUuidGetMemberId(uuid);
     }
 
-    public Integer findByUuidGetCurrentPage(String uuid) {
-        return bookRepository.findByUuidGetCurrentPage(uuid);
+    public Long findByUuidGetBookId(String uuid) {
+        return bookRepository.findByUuidGetBookId(uuid);
     }
 
     public Integer getPageTotal(String uuid){
