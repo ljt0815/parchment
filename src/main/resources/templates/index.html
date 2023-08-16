@@ -7,9 +7,47 @@
 <head>
     <script src="/js/index.js"></script>
     <link rel="stylesheet" href="/css/index.css"/>
+    <style>
+        #dropdown-menu2 {
+            position: absolute;
+            background-color:#dedede;
+        }
+    </style>
 </head>
 <body>
+<!-- rightClick dropdown -->
+<div class="dropdown-menu" id="dropdown-menu2">
+    <a class="dropdown-item" id="book-rename">책 제목 변경</a>
+    <a class="dropdown-item" id="book-delete">삭제</a>
+</div>
   <div class="d-flex my-5 my-height">
+      <!-- modal -->
+      <div class="modal fade" id="modal" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true" >
+          <div class="modal-dialog">
+              <div class="modal-content" >
+                  <div class="modal-header">
+                      <h4 class="modal-title" id="myModalLabel"></h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                          ×
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-4" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-togglebutton="false">
+                          <div role="content">
+                              <div class="widget-body">
+                                  <div id="modal-lbl"></div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                      <button type="button" class="btn btn-dark" id="btn_ok">변경하기</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- content -->
       <div th:if="${#lists.isEmpty(member.books)}" class="container align-self-center">
         <div class="d-flex justify-content-center" style="font-family: 'Noto Sans KR', sans-serif; color: #dedede">
           책이 한 권도 없어요...ㅜㅜ
