@@ -153,4 +153,29 @@ public class BookService {
         }
     }
 
+    public Boolean updateTitle(String username, Map<String, Object> map) {
+        String uuid = (String)map.get("uuid");
+        String beRenamedTitle = (String)map.get("title");
+        Long bookId = findByUuidGetBookId(uuid);
+        if (bookId == null)
+            return false;
+        Book book = find(bookId);
+        if (!username.equals(book.getMember().getUsername()))
+            return false;
+        book.setTitle(beRenamedTitle);
+        save(book);
+        return true;
+    }
+
+    public boolean deleteBook(String username, Map<String, Object> map) {
+        String uuid = (String)map.get("uuid");
+        Long bookId = findByUuidGetBookId(uuid);
+        if (bookId == null)
+            return false;
+        Book book = find(bookId);
+        if (!username.equals(book.getMember().getUsername()))
+            return false;
+        bookRepository.deleteById(bookId);
+        return true;
+    }
 }

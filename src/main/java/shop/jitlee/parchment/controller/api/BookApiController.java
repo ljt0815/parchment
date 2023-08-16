@@ -62,4 +62,18 @@ public class BookApiController {
             return new ResponseDto<>(HttpStatus.NOT_FOUND.value(), rtn);
         return new ResponseDto<>(HttpStatus.OK.value(), rtn);
     }
+
+    @PostMapping("/book/rename")
+    public ResponseDto<Integer> renameBook(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody Map<String, Object> map) {
+        if (!bookService.updateTitle(principalDetails.getUsername(), map))
+            return new ResponseDto<>(HttpStatus.FORBIDDEN.value(), -1);
+        return new ResponseDto<>(HttpStatus.OK.value(), 1);
+    }
+
+    @PostMapping("/book/delete")
+    public ResponseDto<Integer> deleteBook(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody Map<String, Object> map) {
+        if (!bookService.deleteBook(principalDetails.getUsername(), map))
+            return new ResponseDto<>(HttpStatus.FORBIDDEN.value(), -1);
+        return new ResponseDto<>(HttpStatus.OK.value(), 1);
+    }
 }

@@ -44,6 +44,7 @@ $(function() {
     let isDropped = false;
     let targetUuid;
     let targetName;
+    let modalMode;
     function dropMenu(e) {
         e.preventDefault();
         if ($(e.target).parents(".book").length >= 1) {
@@ -76,6 +77,7 @@ $(function() {
     });
     $("#book-rename").click(function() {
         $("#modal").modal("show");
+        modalMode = 1;
         $("#myModalLabel").text("책 이름 변경");
         $("#modal-lbl").children().remove();
         $("#modal-lbl").append('<input type="text" id="rename-bookName" placeholder="'+targetName+'" class="form-control">');
@@ -83,10 +85,31 @@ $(function() {
     });
     $("#book-delete").click(function() {
         $("#modal").modal("show");
+        modalMode = 2;
         $("#myModalLabel").text("책 삭제");
         $("#modal-lbl").children().remove();
         $("#modal-lbl").append('<p>정말로 책을 삭제하시겠습니까?</p>');
         $("#btn_ok").text("삭제");
     });
-
+    $("#btn_ok").click(function() {
+        if (modalMode == 1) {
+            let data = {
+                uuid : targetUuid,
+                title : $("#rename-bookName").val()
+            }
+            $.ajax({
+                url: "/book/rename",
+                data: JSON.stringify(data),
+                async: true,
+                contentType: "application/json; charset=utf-8",
+                method: "POST",
+                dataType: "json"
+            }).done(function(resp){
+                if (resp.data == 1)
+                    location.href="/";
+            }).fail(function(xhr, status, errorThrown){
+                console.log(errorThrown + status);
+            });
+        }
+    });
 })
