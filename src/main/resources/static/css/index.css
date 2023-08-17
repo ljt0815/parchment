@@ -47,6 +47,9 @@ html, body{
 #modal {
     padding-top : 13rem;
 }
+#dropdown-menu2 {
+    cursor: default;
+}
 @keyframes rotate {
     from {
         transform: rotate(0deg);

@@ -6,15 +6,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.jitlee.parchment.dto.ResponseDto;
-import shop.jitlee.parchment.entity.Book;
-import shop.jitlee.parchment.entity.Member;
-import shop.jitlee.parchment.entity.Pdf;
+import shop.jitlee.parchment.entity.*;
 import shop.jitlee.parchment.repository.BookRepository;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -24,6 +23,7 @@ public class BookService {
     private final BookRepository bookRepository;
     private final MemberService memberService;
     private final PageService pageService;
+    private final ImageService imageService;
 
     @Value("${myPath.externalImgStorage}")
     private String imgPath;
@@ -175,7 +175,20 @@ public class BookService {
         Book book = find(bookId);
         if (!username.equals(book.getMember().getUsername()))
             return false;
+
+        List<Long> imageIdList = pageService.getPagesImageId(bookId);
+        pageService.deletePages(bookId);
         bookRepository.deleteById(bookId);
+        imageService.deleteImages(imageIdList);
+
+        File folder = new File(imgPath + uuid);
+        if (folder.exists() && folder.isDirectory()) {
+            File[] fileList = folder.listFiles();
+
+            for (int i = 0; i < fileList.length; i++)
+                fileList[i].delete();
+            folder.delete();
+        }
         return true;
     }
 }

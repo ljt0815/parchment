@@ -106,7 +106,28 @@ $(function() {
                 dataType: "json"
             }).done(function(resp){
                 if (resp.data == 1)
-                    location.href="/";
+                    location.href = "/";
+                else
+                    alert("에러");
+            }).fail(function(xhr, status, errorThrown){
+                console.log(errorThrown + status);
+            });
+        } else if (modalMode == 2) {
+            let data = {
+                uuid : targetUuid
+            }
+            $.ajax({
+                url: "/book/delete",
+                data: JSON.stringify(data),
+                async: true,
+                contentType: "application/json; charset=utf-8",
+                method: "POST",
+                dataType: "json"
+            }).done(function(resp){
+                if (resp.data == 1)
+                    location.href = "/";
+                else
+                    alert("에러");
             }).fail(function(xhr, status, errorThrown){
                 console.log(errorThrown + status);
             });
