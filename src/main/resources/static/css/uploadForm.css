@@ -29,3 +29,6 @@ html, body{
 #modal {
     padding-top : 13rem;
 }
+#upload-lbl {
+    display: none;
+}

@@ -1,5 +1,4 @@
 let uploadFile = null;
-let isAnimated = false;
 let bodycnt = 0;
 let cnt = 0;
 
@@ -82,7 +81,6 @@ $(function() {
             });
         },
         "dragleave" : function(e) {
-            // e.stopPropagation();
             e.preventDefault();
             cnt--;
             if (cnt == 0) {
@@ -126,9 +124,13 @@ $(function() {
         }
     });
     $("#btn_upload").click(function(){
+        $(".progress").css("display", "flex");
+        $("#upload-lbl").css("display", "block");
+        $(".close").attr("data-dismiss", ""); // x버튼 비활성화
+        $("#btn_upload").attr("disabled", ""); // 업로드버튼 비활성화
+
         let data = new FormData();
         data.append("file", uploadFile);
-        $(".progress").css("display", "flex");
         $.ajax({
             data: data,
             type: "POST",
@@ -139,6 +141,8 @@ $(function() {
                 let xhr = $.ajaxSettings.xhr();
                 xhr.upload.onprogress = function (e) {
                     let percent = Math.ceil(e.loaded * 100 / e.total);
+                    if (percent === 100)
+                        $("#upload-lbl").text("서버에서 처리중입니다. 잠시만 기다려주세요.")
                     $(".progress-bar").css("width", percent + "%");
                     $(".progress-bar").text(percent + "%");
                 };
