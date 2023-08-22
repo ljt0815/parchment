@@ -25,10 +25,6 @@ public class PageService {
         return pageRepository.findByPageNoUuidGetImgPath(pageNo, uuid);
     }
 
-    public List<Page> getBookPages(Long bookId) {
-        return pageRepository.getBookPages(bookId);
-    }
-
     @Transactional
     public void deletePages(Long bookId) {
         pageRepository.deletePages(bookId);
