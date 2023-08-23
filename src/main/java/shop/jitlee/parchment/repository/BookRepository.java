@@ -1,8 +1,11 @@
 package shop.jitlee.parchment.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import shop.jitlee.parchment.entity.Book;
+import shop.jitlee.parchment.entity.Member;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("SELECT b.uuid FROM Book b where b.pdf.id = :pdfId")
@@ -21,4 +24,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query("select b.id from Book b where b.uuid = :uuid")
     Long findByUuidGetBookId(String uuid);
+
+    Page<Book> findAllByMember(Member member, Pageable pageable);
 }

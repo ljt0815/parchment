@@ -48,7 +48,7 @@
           </div>
       </div>
       <!-- content -->
-      <div th:if="${#lists.isEmpty(member.books)}" class="container align-self-center">
+      <div th:if="${#lists.isEmpty(books.content)}" class="container align-self-center">
         <div class="d-flex justify-content-center" style="font-family: 'Noto Sans KR', sans-serif; color: #dedede">
           책이 한 권도 없어요...ㅜㅜ
         </div>
@@ -56,9 +56,14 @@
           <a href="/book/uploadForm">책 업로드 하러 가기</a>
         </div>
       </div>
-      <div th:if="${!#lists.isEmpty(member.books)}" id="book-list" class="container">
+      <div th:if="${!#lists.isEmpty(books.content)}" id="book-list" class="container">
+<!--          <script th:inline="javascript">-->
+<!--              /*<![CDATA[*/-->
+<!--              alert(/*[[${books.number}]]*/);-->
+<!--              /*]]>*/-->
+<!--          </script>-->
           <div class="row">
-            <div class="col-md-2 my-5 book" th:each="book: ${member.books}">
+            <div class="col-md-2 my-5 book" th:each="book: ${books.content}">
                 <div class="my-2 thumbnail-box">
                     <div th:if="${!book.pdf.isConverted}" class="loading">
                         <i class="fa fa-spinner loading-ico" aria-hidden="true"></i>

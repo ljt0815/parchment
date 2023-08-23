@@ -2,10 +2,11 @@ package shop.jitlee.parchment.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import shop.jitlee.parchment.dto.ResponseDto;
 import shop.jitlee.parchment.entity.*;
 import shop.jitlee.parchment.repository.BookRepository;
 
@@ -190,5 +191,9 @@ public class BookService {
             folder.delete();
         }
         return true;
+    }
+
+    public Page<Book> getBookList(Member member, Pageable pageable) {
+        return bookRepository.findAllByMember(member, pageable);
     }
 }
